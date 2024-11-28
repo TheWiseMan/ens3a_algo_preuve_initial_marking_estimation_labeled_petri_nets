@@ -21,5 +21,25 @@ class Place:
 
 #region class:Transition
 class Transition:
-    pass
+    bMinus: int = 0
+    bPlus: int = 0
+    label: str = "defaultlabel"
+    def isEnabled(self) -> bool:
+        """Checks if the current transition is enabled
+
+        Returns:
+            bool: duh
+        """
+        pass
+    def fire(self):
+        """Fires the transition and redistributes tokens.
+        The underlying checks are left to the `Place` class
+        """
+        pass
+#endregion
+
+#region class:LabelPetriNet
+class LabelPetriNet:
+    places: set[Place] = set()
+    transitions: set[Transition] = set()
 #endregion
