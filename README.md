@@ -15,3 +15,6 @@ class PetriNet:
     marking: list[int]
     transitions: list[Transition]
 ```
+
+A label is an ```str```.
+The obsrved label is  ```list[str]```
