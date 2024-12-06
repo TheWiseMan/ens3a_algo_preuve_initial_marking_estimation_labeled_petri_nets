@@ -14,7 +14,33 @@ def compare(a:list[int], b:list[int]):
             return 0
     return 1
 
+def maximum(a:list[int], b:list[int]):
+    """This function return the max of two markings
+    
+    Args:
+        a (list[int]) : first marking
+        b (list[int]) : second marking
+    
+    Return:
+        list[int] : the max of the two marking
+        """
+    if len(a) != len(b):
+        raise IndexError
+    return [max(a[i], b[i]) for i in range(len(a))]
 
+def substract(a:list[int], b:list[int]):
+    """This function return the difference between two lists
+    
+    Args:
+        a (list[int]) : first list
+        b (list[int]) : second list
+    
+    Return:
+        list[int] : the max of the two marking
+        """
+    if len(a) != len(b):
+        raise IndexError
+    return [a[i] - b[i] for i in range(len(a))]
 #region class:Place
 class Place:
 
@@ -86,15 +112,16 @@ class Incident:
             self.bMinus[arc[0]][arc[1]] = arc[2]
             self.bPlus[arc[0]][arc[1]] = arc[3]
             self.b[arc[0]][arc[1]] = arc[3] - arc[2]
-
+        ic(self.bMinus)
+        ic(self.bPlus)
+        ic(self.b)
     def __matmul__(self, marking:list[int]):
         """return the matrix product between the Incident matrix B and a marking
         Syntax : B:Incident @ mark:list[int]
         
         Args: 
             marking (list[int]) : a line vectore representing the marking"""
-        ic(marking)
-        ic(self.b)
+        #ic(marking)
         # b * marking
         """Raa = []
         for i in range(len(self.b)):
@@ -133,32 +160,28 @@ class LabelPetriNet:
         j = 1
 
         # Step 3
-        while j < k:
+        while j < k+1:
             ic(j)
             C.append([])
             ic(C)
             for R in C[j-1]:
                 ic(R)
                 for trans in self.transitions:
-                    if trans.label != observed_label[j]:
+                    if trans.label != observed_label[j-1]:
                         continue
-                    ic(R[1])
+                    ic(trans.id)
                     for M0 in R[1]:
                         ic(M0)
                         M1 = [M0[i] + list(self.B @ R[0])[i] for i in range(len(M0))]
-                        ic(M1)
-                        ic(R)
-                        ic(R[1])
                         #ic(self.B @ R[1])
-                        M2 = [self.B.bMinus[:][trans.id][i] - list(self.B @ R[1][0])[i] for i in range(len(self.B.bMinus[:][trans.id]))]
-                        ic(M2)
-                        if compare(M1, M2) == 1:
-                            M0p = M2
-                        else:
-                            M0p = M1
+                        M2 = [self.B.bMinus[i][trans.id] for i in range(len(self.B.bMinus))]
+                        ic(M1, M2)
+                        M0p = substract(maximum(M1, M2), self.B @ R[0])
+                        ic(M0p)
                         yp = [x for x in R[0]] # deep copy
                         yp[trans.id] += 1
                         if yp not in [x[0] for x in C[j]]: # if yp has no appeared in C(j)
+                            ic("adding", yp, M0p)
                             C[j].append([yp, [M0p]])
                         else:
                             flag = True
@@ -175,14 +198,16 @@ class LabelPetriNet:
             j = j+1
         # Step 8
         ic(C)
-        Min = sum(C[k-1][0][1])
-        iMin=0
-        for R in C[k]:
-            Min_i = min([sum(x for x in R[1])])
-            if Min_i < Min:
-                Min = Min_i
-                iMin = i
-        print(C[k][iMin][0])
+        Min = sum(C[k-1][0][1][0])
+        sig_min = C[k-1][0][0]
+        for R in C[k-1]:
+            for M in R[1]:
+                Min_i = sum(M)
+                ic(M, Min_i)
+                if Min_i < Min:
+                    Min = Min_i
+                    sig_min = R[0]
+        print("Minimal token number : {} , transitions : {}".format(Min, sig_min))
 
 
 
