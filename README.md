@@ -1,20 +1,12 @@
-Defined interfaces
+# Implementation of Minimum Initial Marking Estimation in Labaled Petri Net
 
-- [ ] Place
-- [ ] Transition
-- [ ] LabeledPetriNet
+Author :
+- DEPIN Emeric
+- GRILLET Jean-Dorian
 
-On pourrait juste faire
+This project implement an algorithm to find the minimum marking in labeled petri nets [1].
 
-```py
-class Transition:
-    Bminus: list[list[int]] # Bminus[i][0] if id of p_i, and Bminus[i][1] is weight = B(p_i->t)
-    Bplus: list[list[int]]
-    label: str
-class PetriNet:
-    marking: list[int]
-    transitions: list[Transition]
-```
+## Running the project
+No library is required to start the code , just run `main.py`. The function `exemple_net()` implements the exemple presented in [1].
 
-A label is an ```str```.
-The obsrved label is  ```list[str]```
+[1] : L. Li and C. N. Hadjicostis, "Minimum initial marking estimation in labeled Petri nets," 2009 American Control Conference, St. Louis, MO, USA, 2009, pp. 5000-5005, doi: 10.1109/ACC.2009.5160266.
