@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+}
+#container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#paper {
+    width: 100% !important;
+    height: 100% !important;
+}
+#columnRight {
+    width: 100%;
+}
+textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+}
