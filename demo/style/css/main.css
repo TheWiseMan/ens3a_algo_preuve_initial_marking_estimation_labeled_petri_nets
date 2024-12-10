@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: monospace;
 }
 
 #container {
@@ -18,12 +19,50 @@ body {
 
 #columnRight {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  text-decoration: underline 3px solid #6363ff;
+  margin: 0px;
 }
 
 textarea {
   resize: none;
   width: 100%;
   box-sizing: border-box;
+  padding: 0;
+  outline: none;
+}
+
+#log {
+  margin: 0;
+  border: 1px solid #6363ff;
+}
+#log::before {
+  content: "log";
+  background-color: aliceblue;
+  display: block;
+  padding: 5px;
+}
+#log span::after {
+  content: " ";
+}
+
+button {
+  border: none;
+  background-color: aliceblue;
+  padding: 5px;
+  border: 2px solid #6363ff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+button:hover {
+  background-color: #6363ff;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

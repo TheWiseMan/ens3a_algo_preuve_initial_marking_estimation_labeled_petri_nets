@@ -69,14 +69,9 @@ const paper = new joint.dia.Paper({
     width: rect.width,
     height: rect.height,
     background: { color: '#F5F5F5' },
-    cellViewNamespace: namespace
+    cellViewNamespace: namespace,
+    interactive: false,
 });
-
-type GraphJSON = {
-    places: string[],
-    marking: number[],
-    transitions: { label: string, inputArcs: [string, number][], outputArcs: [string, number][] }[]
-}
 
 function layout(petriNet: Graph) {
 
@@ -93,6 +88,11 @@ function layout(petriNet: Graph) {
 
     DirectedGraph.layout(graph, {
         setLinkVertices: true,
+        rankDir: 'TB',
+        nodeSep: 0,
+        rankSep: 0,
+        edgeSep: 0
+        //ranker: "tight-tree"
         /*marginX: 5,
         marginY: 5*/
     });
@@ -162,6 +162,7 @@ function makeTransition(id: number, label: string) {
         attrs: {
             body: {
                 stroke: 'lightgrey',
+                fill: "#f5f5f5"
             },
             label: {
                 text: label,
@@ -283,7 +284,7 @@ class Graph {
             let placeI = this.places.indexOf(a[0]);
             this.marking[placeI] += a[1];
         });
-        let preElt = document.createElement("pre");
+        let preElt = document.createElement("span");
         preElt.innerHTML = t.label;
         logElement.appendChild(preElt);
     }
@@ -422,6 +423,116 @@ document.getElementById("graph2")!.onclick = () => {
                 label: "c",
                 inputArcs: [["P3", 1]],
                 outputArcs: [["P6", 1]]
+            }
+        ]
+    });
+}
+document.getElementById("graph3")!.onclick = () => {
+    g = new Graph({
+        places: ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "P11", "P12", "P13", "P14", "P15"],
+        transitions: [
+            {
+                label: "a",
+                inputArcs: [["P1", 2], ["P3", 1]],
+                outputArcs: [["P2", 1], ["P4", 1]]
+            },
+            {
+                label: "b",
+                inputArcs: [["P2", 1]],
+                outputArcs: [["P5", 2]]
+            },
+            {
+                label: "c",
+                inputArcs: [["P4", 1], ["P5", 1]],
+                outputArcs: [["P6", 1]]
+            },
+            {
+                label: "d",
+                inputArcs: [["P6", 2]],
+                outputArcs: [["P7", 1], ["P8", 1]]
+            },
+            {
+                label: "e",
+                inputArcs: [["P7", 1]],
+                outputArcs: [["P9", 1], ["P10", 1]]
+            },
+            {
+                label: "f",
+                inputArcs: [["P8", 1], ["P9", 1]],
+                outputArcs: [["P11", 2]]
+            },
+            {
+                label: "g",
+                inputArcs: [["P10", 2]],
+                outputArcs: [["P12", 1], ["P13", 1]]
+            },
+            {
+                label: "h",
+                inputArcs: [["P11", 1]],
+                outputArcs: [["P14", 1]]
+            },
+            {
+                label: "i",
+                inputArcs: [["P13", 1], ["P14", 1]],
+                outputArcs: [["P15", 1]]
+            },
+            {
+                label: "a",
+                inputArcs: [["P12", 1]],
+                outputArcs: [["P5", 1], ["P1", 1]]
+            },
+            {
+                label: "b",
+                inputArcs: [["P15", 1]],
+                outputArcs: [["P8", 1], ["P3", 1]]
+            },
+            {
+                label: "c",
+                inputArcs: [["P3", 1]],
+                outputArcs: [["P6", 1]]
+            },
+            {
+                label: "d",
+                inputArcs: [["P4", 1]],
+                outputArcs: [["P13", 1], ["P7", 1]]
+            },
+            {
+                label: "e",
+                inputArcs: [["P9", 1], ["P2", 1]],
+                outputArcs: [["P14", 1]]
+            },
+            {
+                label: "f",
+                inputArcs: [["P11", 1], ["P1", 1]],
+                outputArcs: [["P12", 1], ["P15", 1]]
+            }
+        ]
+    });
+}
+
+document.getElementById("graph4")!.onclick = () => {
+    g = new Graph({
+        places: ["P1", "P2", "P3", "P4"],
+        transitions: [
+            {
+                label: "a",
+                inputArcs: [["P1", 1]],
+                outputArcs: [["P2", 1]]
+            },
+            {
+                label: "b",
+                inputArcs: [["P2", 1]],
+                outputArcs: [["P3", 1]]
+            },
+            {
+                label: "c",
+                inputArcs: [["P3", 1]],
+                outputArcs: [["P4", 1]]
+            },
+            {
+                label: "d",
+                inputArcs: [["P4", 1]],
+                outputArcs: [["P1", 1]]
             }
         ]
     });

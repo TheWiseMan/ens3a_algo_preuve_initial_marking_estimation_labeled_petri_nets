@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="group1, project">
-    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="keywords" content="group1, project, petri net, marking">
+    <meta name="description" content="Petri Net Initial marking interactive viewer">
     <link rel="shortcut icon" href="./icon_path">
-    <title>{{PROJECT_NAME}}</title>
+    <title>Petri Net - Initial Marking</title>
 
     <!-- Facebook Meta Tags -->
     <meta name="og:url" property="og:url" content="https://group1.fr">
     <meta name="og:type" property="og:type" content="website">
-    <meta property="og:title" content="{{PROJECT_NAME}}">
-    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:title" content="Petri Net - Initial Marking">
+    <meta property="og:description" content="Petri Net Initial marking interactive viewer">
     <meta name="og:image" property="og:image" content="{{BANNER_IMG_URL}}">
 
     <!-- Twitter Meta Tags -->
@@ -29,16 +29,21 @@
 
 <body>
     <div id="container">
-    <div id="paper"></div>
-    <div id="columnRight">
-        <textarea name="" id="graphdata"></textarea>
-        <button id="minM0">Compute Minimum initial marking</button>
-        <button id="clearLog">Clear log</button>
-        <button id="graph1">Test Graphe 1</button>
-        <button id="graph2">Test Graphe 2</button>
-        <div id="log"></div>
+        <div id="paper"></div>
+        <div id="columnRight">
+            <h1>Minimum Initial Marking Estimation in Labeled Petri Nets</h1>
+            <textarea name="" id="graphdata" placeholder="Enter label sequence (separeted by spaces)" spellcheck="false"></textarea>
+            <pre id="log"></pre>
+            <div>
+                <button id="minM0">Compute Minimum initial marking</button>
+                <button id="clearLog">Clear log</button>
+                <button id="graph1">Test Graph 1</button>
+                <button id="graph2">Test Graph 2</button>
+                <button id="graph3">Test Graph 3</button>
+                <button id="graph4">Test Graph 4</button>
+            </div>
+        </div>
     </div>
-</div>
     <script src="./index.js"></script>
 </body>
 
