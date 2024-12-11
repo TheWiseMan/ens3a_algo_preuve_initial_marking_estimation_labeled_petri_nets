@@ -15,7 +15,7 @@ No library is required to start the code , just run `main.py`. The function `exe
 
 # Javascript
 
-The algorithm is described in demo/script/ts/algo.ts
+The algorithm is described in `demo/script/ts/algo.ts`
 
 The console can be used to load custom nets via the variable `petri`.
 
