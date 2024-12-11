@@ -8,7 +8,7 @@ This project implement an algorithm to find the minimum marking in labeled petri
 
 # Demo
 
-https://jdgrillet.com/proj/petrinet/?i=45
+https://jdgrillet.com/proj/petrinet/
 
 ## Running the project
 No library is required to start the code , just run `main.py`. The function `exemple_net()` implements the exemple presented in [1].
